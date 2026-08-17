@@ -1,0 +1,13 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build NotchMemo
+        run: swift build
