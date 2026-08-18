@@ -57,7 +57,7 @@ final class NotchMemoModel: ObservableObject {
     }
 
     func clearCompleted() {
-        tasks.removeAll(\.isDone)
+        tasks.removeAll(where: \.isDone)
     }
 
     func toggleTimer() { timerRunning.toggle() }
