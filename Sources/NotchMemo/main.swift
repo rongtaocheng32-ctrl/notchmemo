@@ -56,6 +56,10 @@ final class NotchMemoModel: ObservableObject {
         tasks.removeAll { $0.id == task.id }
     }
 
+    func clearCompleted() {
+        tasks.removeAll(where: \.isDone)
+    }
+
     func toggleTimer() { timerRunning.toggle() }
 
     func resetTimer() {
@@ -146,6 +150,13 @@ struct NotchMemoView: View {
                         Button("添加") { model.addTask() }
                             .disabled(model.newTask.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     }
+                }
+                if model.completedCount > 0 {
+                    Button("清理已完成任务", systemImage: "checkmark.circle") {
+                        model.clearCompleted()
+                    }
+                    .buttonStyle(.borderless)
+                    .foregroundStyle(.secondary)
                 }
             }
 
